@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<!--PluginData is used to make a new submenu for the plugin. A separator and a "Remove Plugin" option is appended automatically.-->
+<PluginData> <!--Each plugin's submenu must have a name and main function, which is called repeatedly. An optional init function is called once when the plugin is loaded.-->
+	<name>
+		Resolution
+	</name>
+	
+	<main>
+		Main
+	</main>
+	
+	<PopupMenu> <!--Menus within the submenu can also be used.-->
+		<name>
+			Resolution
+		</name>
+		
+		<Group style="radio"> <!--Menu items can be grouped into one style.-->
+			<Item style="checked"> <!--Each item has a name, a callback function within the DLL, and an optional style.-->
+				<name>
+					1920x1080
+				</name>
+				
+				<func>
+					Res1920x1080
+				</func>
+			</Item>
+			
+			<Item>
+				<name>
+					1280x1024
+				</name>
+				
+				<func>
+					Res1280x1024
+				</func>
+			</Item>
+			
+			<Item>
+				<name>
+					1024x768
+				</name>
+				
+				<func>
+					Res1024x768
+				</func>
+			</Item>
+			
+			<Item>
+				<name>
+					320x200 <!--Funnily enough, the school monitors support this one.-->
+				</name>
+				
+				<func>
+					Res320x200
+				</func>
+			</Item>
+		</Group>
+	</PopupMenu>
+		
+	<PopupMenu>
+		<name>
+			Refresh Rate
+		</name>
+		
+		<Group style="radio">
+			<Item style="checked">
+				<name>
+					60Hz
+				</name>
+				
+				<func>
+					Freq60Hz
+				</func>
+			</Item>
+				
+			<Item>
+				<name>
+					70Hz
+				</name>
+				
+				<func>
+					Freq70Hz
+				</func>
+			</Item>
+			
+			<Item>
+				<name>
+					85Hz
+				</name>
+				
+				<func>
+					Freq85Hz
+				</func>
+			</Item>
+		</Group>
+	</PopupMenu>
+	
+	<Separator style="disabled"/> <!--Separators can be used to set off different groups of items.-->
+	
+	<Item>
+		<name>
+			Reset to Default
+		</name>
+		
+		<func>
+			Reset
+		</func>
+	</Item>
+</PluginData>

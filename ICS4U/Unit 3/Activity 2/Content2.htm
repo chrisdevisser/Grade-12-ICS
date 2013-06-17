@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Content</title>
+    <link rel="stylesheet" href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/course_techno.css?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" type="text/css" />
+<script type="text/javascript" src="/d2l/common/math/MathML.js?v=10.1.0.390-56" ></script><script type="text/javascript">D2LMathML.DesktopInit('/d2l/common/mathjax/2.0.1/MathJax.js?config=MML_HTMLorMML&v=10.1.0.390-56','/d2l/common/mathjax/2.0.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML&v=10.1.0.390-56');</script></head>
+<body>
+<div class="wrap">
+<div class="header"><img src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/globe.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" class="globe" alt="Image of Globe" />
+<div class="courseTitle">ICS4U (Java): Computer Science, Grade 12, University Preparation</div>
+<h1>Unit 3: Advanced Topics</h1>
+<h2>Activity 2: Recursion</h2>
+</div>
+<div class="subNav"><a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/overview.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Overview</a> | <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/expectations.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Expectations</a> | <b>Content</b> | <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/assignment.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Assignment</a></div>
+<h3>Content</h3>
+<hr />
+<h4>Sample Programs that Require the Use of Recursion</h4>
+<p>In the factorial function and the greatest common divisor function that we just looked at, there is no good reason to use a recursive program since the result can easily be achieved, taking up less memory, using <em>iteration</em>.</p>
+<p>However, some problems are not easily solved using iteration and are better suited to a <strong>recursion solution</strong>.</p>
+<p>Two of these problems will now be discussed.</p>
+<ul>
+<li>Tower of Hanoi</li>
+<li>Word Scramble</li>
+</ul>
+<h4><img class="icon" src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/example.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="Example Icon" /> Example 1</h4>
+<p><strong>The Tower of Hanoi</strong></p>
+<p>In the <strong>Tower of Hanoi</strong>, there are three pegs: <strong>A</strong>, <strong>B</strong>, and <strong>C</strong>.</p>
+<p>On peg <strong>A</strong>, there are a number of discs, <em>1</em> to <em>n</em>, <em>1 </em>being the smallest and <em>n</em> being the biggest. The discs are placed on peg <strong>A</strong> in decreasing order of size from bottom to top. Disc <em>n</em>, the largest, is at the bottom; disc <em>1</em>, the smallest, is at the top.</p>
+<p>The objective is to move all <em>n</em> discs from peg <strong>A</strong> to peg <strong>C</strong> (using, if required, the &ldquo;temporary peg,&rdquo; peg <strong>B</strong>) subject to the following conditions:</p>
+<ol>
+<li>Only one disc, the top disc on any peg, can be moved at a time.</li>
+<li>A larger disc cannot be placed on top of a smaller disc.</li>
+</ol>
+<h4><img style="width: 42px; height: 42px;" alt="Practice Icon" src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/practice_exercises.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" /> Practice</h4>
+<div class="questions">
+<p>To become familiar with this problem, find a website that will allow you to try to solve the Tower of Hanoi problem. Check out this website to start:</p>
+<p><a href="http://www.dynamicdrive.com/dynamicindex12/towerhanoi.htm" target="_blank">Dynamic Drive: Towers of Hanoi</a></p>
+</div>
+<p><strong>Recursive Algorithm to Solve this Problem</strong></p>
+<p><strong>Note:</strong> <em>n</em> represents the number of discs.</p>
+<p>IF <em>n</em> is <em>1</em>, move disc <em>1</em> <em>to</em> the <strong><em>to</em></strong> peg (C in above example) from the <strong><em>from</em></strong> peg (A in above example).</p>
+<p>ELSE</p>
+<p>Move (n-1) discs to the <strong><em>temporary</em></strong> peg (B in above example) from the <strong><em>from</em></strong> peg using the <strong><em>to</em></strong> peg<br /> Move disc <em>n</em> to the <strong><em>to</em></strong> peg from the <strong><em>from</em></strong> peg<br /> Move (n-1) discs to the <strong><em>to</em></strong> peg from the <strong><em>temporary</em></strong> peg using the <strong><em>from</em></strong> peg</p>
+<p><strong>Code to Solve this Problem</strong></p>
+<div class="colourbox1">
+<pre> public static void main(String[] args) {<br />        int n = 8;<br />        String fromPeg = "A";<br />        String toPeg = "C";<br />        String tempPeg = "B";<br /><br />        System.out.println("Towers of Hanoi problem");<br />        System.out.println("There are " + n + " discs on peg A initially ");<br />        hanoi (fromPeg, toPeg, tempPeg, n);<br /><br />    }<br />    static public void hanoi (String from, String to, String temp, int n) {<br />        if (n ==1) {<br />            System.out.println("Move disc 1 from " + from + " to " + to);<br />        } else {<br />            hanoi (from, temp, to, n-1);<br />            System.out.println("Move disc " + n + " from " + from + " to " + to);<br />            hanoi (temp, to, from, n-1);<br />        }<br />    }</pre>
+</div>
+<p>Trace through the code shown above (instead of just running it, trace through each line as it runs), and determine what output will be displayed as a result of the execution of this code.</p>
+<h4><img style="width: 42px; height: 42px;" alt="Practice Icon" src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/practice_exercises.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" /> Practice</h4>
+<div class="questions">
+<p>Download the <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/docs/Hanoi.zip?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" target="_blank">program files</a> and run the program to verify the output.</p>
+<p>Try changing the variable for the number of discs from a value from 1 to 8, run the program, and note the information displayed in the Output window.</p>
+</div>
+<h4><img class="icon" src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/example.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="Example Icon" /> Example 2</h4>
+<p><strong>Word Scramble</strong></p>
+<p>A <strong>Word Scramble</strong> consists of a group of scrambled letters; for example, the scrambled letters NUF, when unscrambled, form the following &ldquo;words&rdquo;:</p>
+<table class="CenterTable" style="border-left-width: 1px; border-left-style: solid; border-left-color: #000000; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000; width: 95%;" summary="This table is for formatting purposes." cellpadding="6" cellspacing="0"><caption></caption>
+<tbody>
+<tr>
+<td style="border: 1px solid #000; border-left: none; border-bottom: none;"><span style="display: block;"> NUF </span></td>
+<td style="border: 1px solid #000; border-left: none; border-bottom: none;"><span style="display: block;"> NFU </span></td>
+<td style="border: 1px solid #000; border-left: none; border-bottom: none;"><span style="display: block;"> UNF </span></td>
+<td style="border: 1px solid #000; border-left: none; border-bottom: none;"><span style="display: block;"> UFN </span></td>
+<td style="border: 1px solid #000; border-left: none; border-bottom: none;"><span style="display: block;"> FNU </span></td>
+<td style="border: 1px solid #000; border-left: none; border-bottom: none;"><span style="display: block;"> FUN </span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recursive Algorithm to Solve this Problem</strong></p>
+<p>IF the length of the string is 1, then print the word</p>
+<p>ELSE</p>
+<p>For each character in the string, use the character as the first letter in the word and build another word from the remaining letters.</p>
+<p><strong>Code to Solve this Problem</strong></p>
+<div class="colourbox1">
+<p>public static void main(String[] args) {<br />&nbsp; &nbsp;String letters = "NUF";<br />&nbsp; &nbsp;System.out.println("Word Scramble \n");<br />&nbsp; &nbsp;scrambleWords(letters, "");<br /> }</p>
+<p>static public void scrambleWords (String word, String scrambledLetters) {<br />&nbsp; &nbsp;String remainingLetters;<br />&nbsp; &nbsp;String origWord = word;<br />&nbsp; &nbsp;String origscrambledLetters = scrambledLetters;</p>
+<p>&nbsp; &nbsp;if (word.length() == 1) {<br />&nbsp; &nbsp; &nbsp; System.out.println(scrambledLetters + word);<br />&nbsp; &nbsp;} else {<br />&nbsp; &nbsp; &nbsp; for (int pos = 0; pos &lt;origWord.length(); pos++) {<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;remainingLetters = origWord.substring(0, pos) +<br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;origWord.substring(pos+1, origWord.length());</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;scrambleWords(remainingLetters, origscrambledLetters <br />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;+ origWord.charAt(pos));<br />&nbsp; &nbsp; &nbsp; }<br />&nbsp; &nbsp;}<br /> }</p>
+</div>
+<h4><img style="width: 42px; height: 42px;" alt="Practice Icon" src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/practice_exercises.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" /> Practice Exercise</h4>
+<div class="questions">
+<p>Download the <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/docs/WordScramble.zip?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" target="_blank">program files </a> and run the program.</p>
+<p>Change the value of the letters being jumbled, run the program, and note the information displayed in the Output window.</p>
+</div>
+<p><strong>Final Thoughts about Recursion</strong></p>
+<p><strong>Recursive functions</strong> are common in Computer Science, because they allow programmers to write efficient programs using a minimal amount of code. The downside is that they can create <em>infinite loops</em>, which can cause the program to crash, or worse yet, hang the entire computer system.</p>
+<p><em>Recursion should be used with a function that has a small number or NO parameters</em>, since the recursion places a new occurrence of the function on the stack, along with those variables. It is quite possible for a function to recall itself upwards of thousands of times. Therefore, you could easily run out of memory in the stack when running your recursive program.</p>
+<br />
+<div class="navbuttons"><a id="__back" href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/content.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Back</a></div>
+<div class="disclaimer">
+<p>Unless otherwise indicated, all images in this activity are from the public domain or are &copy; clipart.com or Microsoft clipart and are used with permission.<br /> This is a disclaimer. External Resources will open in a new window. Not responsible for external content.</p>
+</div>
+<hr />
+<div class="subNav"><a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/overview.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Overview</a> | <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/expectations.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Expectations</a> | <b>Content</b> | <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/assignment.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Assignment</a></div>
+</div>
+</body>
+</html>

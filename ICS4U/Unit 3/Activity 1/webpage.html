@@ -1,0 +1,679 @@
+<html>
+	<head>
+		<title>
+			Exploring Sorting Algorithms
+		</title>
+
+		<!-- CSS, particularly right-aligning images and wrapping text around them -->
+		<style>
+			body {
+				background-color: #C6C6C6;
+			}
+			
+			p {
+				overflow: hidden;
+			}
+			
+			img.alignright {
+				float: right; 
+				margin: 0 0 1em 1em
+			}
+			
+			.alignright {
+				float: right; 
+			}
+		</style>
+	</head>
+	
+	<body>
+		<!-- XKCD Ineffective Sorts comic picture -->
+		<a href="http://xkcd.com/1185/">
+			<img 
+				class="alignright"
+				width="600"
+				src="http://imgs.xkcd.com/comics/ineffective_sorts.png"
+				title="StackSort connects to StackOverflow, searches for 'sort a list', and downloads and runs code snippets until the list is sorted."
+				alt="XKCD Ineffective Sorts"
+			/>
+		</a>
+		
+		<!-- For 3D animation -->
+		<div id="frame"></div>
+		
+		<h1>
+			Greetings
+		</h1>
+		
+		<p>
+			I'm here to talk about sorting in Computer Science. 
+			Before you ask, Mr. Spinny Happy Colour Face up there
+			has nothing to do with this, but it is cool, right?
+		</p>
+		
+		<h2>
+			Sorting
+		</h2>
+		
+		<p>
+			Sorting has always been a fundamental part of Computer Science.
+			Sorting things is a part of life. You might have to arrange
+			marks from highest to lowest, entries in a database by name,
+			You could sort the ages of students, or the salaries of teachers.
+			There will always be something to sort, big or small, so you
+			have to choose the right algorithm.
+		</p>
+		
+		<p>
+			For years, computer scientists have been creating, testing,
+			and fine-tuning many different algorithms for sorting.
+			There can never be one true winner because an algorithm
+			that is slower in one situation might be faster in another.
+		</p>
+		
+		<h2>
+			Stability
+		</h2>
+		
+		<p>
+			All sorts are either stable or unstable. The difference is that
+			a stable sort will retain the order of equal elements. For example,
+			if the starting set was: 
+			<br/>
+			5, 2, 3, 2
+			<br/>
+			The resulting set's first 2 would 
+			be the second element in the starting set and the resulting set's
+			second 2 would be the last element in the starting set. An unstable
+			sort does not guarantee the relative order.
+		</p>
+		
+		<h2>
+			Big-O Notation
+		</h2>
+		
+		<p>
+			Computer scientists needed a way to measure how well algorithms perform,
+			and that measurement, also known as the complexity, is written in Big-O Notation. 
+		</p>
+		
+		<p>
+			There are three ways to measure algorithms: best-case, worst-case, 
+			and average-case. The Big-O notation is almost always the <b>worst-case</b>.
+		</p>
+		
+		<p>
+			There are several common complexities:
+		</p>
+		
+		<table id="Common Complexities table" border="1">
+			<th>
+				Complexity
+			</th>
+			
+			<th>
+				Description
+			</th>
+			
+			<tr>
+				<td>
+					O(1)
+				</td>
+				
+				<td>
+					Constant time. The time this takes does not depend on what the algorithm
+					is operating on. For example, reading a variable.
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					O(log(N))
+				</td>
+				
+				<td>
+					<p>
+						Logarithmic time. Doubling the size of the input will only increase
+						the number of iterations needed by one. For example, playing
+						a guessing game where the host says "higher" or "lower". By
+						guessing a number halfway in between the known boundaries
+						each time, it will only take at most 
+						ceil(log<sub>2</sub>(range size))
+						guesses. 
+					</p>
+					
+					<p>
+						Guessing from 1-100 will only take up to 7 guesses
+						(if the number is 52, the guesses could be 50, 75, 62, 56, 53, 51, 52).
+						Guessing from 1-200 will only take up to 8. With the number being 102,
+						the guesses could be 100, 150, 125, 112, 106, 103, 101, 102.
+					</p>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					O(N)
+				</td>
+				
+				<td>
+					<p>
+						Linear time. This means the algorithm has to go through every element
+						in the set. For example, searching through a string to find a
+						character could find it in the first position and do one iteration.
+						It could also find it in the last position and do as many iterations
+						as there are characters in the string. On average, it would find 
+						it in the middle of the string. However, since we use the worst-case
+						complexity, we assume it has to go through every character. By this
+						point, the algorithm is starting to get a tad slow.
+					</p>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					O(N&middot;log(N))
+				</td>
+				
+				<td>
+					<p>
+						Linearithmic time. This is usually the result of performing a
+						logarithmic time algorithm N times. This can happen when recursion
+						is introduced. A famous example of this is mergesort, which will
+						be discussed later.
+					</p>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					O(N<sub>2</sub>)
+				</td>
+				
+				<td>
+					<p>
+						Quadratic time. Algorithms performing with this complexity are
+						generally considered very slow. This means that the algorithm has
+						to go over each element N times. This is best visualized by a
+						doubly-nested for loop.
+					</p>
+				</td>
+			</tr>
+		</table>
+		
+		<p>
+			Back to how algorithms can perform differently in different situations,
+			examine this graph (courtesy of Wolfram Alpha) of linear time vs. quadratic time.
+			The horizontal axis is size, and the vertical axis is time.
+		</p>
+		
+		<!-- Wolfram Alpha graph of y=x vs y=x^2 -->
+		<img 
+			class="alignright"
+			width="399"
+			height="188"
+			src="http://www.wolframalpha.com/share/img?i=d41d8cd98f00b204e9800998ecf8427emiqjqd77cm&f=HBQTQYZYGY4TOM3EMI3WENDEGMYDCM3FG42WKNBWGNSWCNBRMY3Aaaaa"
+			title="Linear vs. quadratic time"
+			alt="Linear vs. quadratic time"
+		/>
+		
+		<p>
+			As you can see, a quadratic time algorithm will perform better than a linear one
+			in the domain (0, 1), but that quickly changes after x=1. 
+			This is a great reason why care should be taken when choosing an algorithm.
+			Choosing the wrong one can quickly grow in time when the input size increases.
+			While this specifically might not be useful, there are
+			many relationships like this that factor into choosing one algorithm over another.
+		</p>
+		
+		<p>
+			Another factor is the starting condition of the input. There are searching 
+			algorithms that depend on the input being sorted, and thus perform much
+			faster, and there are slower algorithms that take a sorted or unsorted range
+			and perform the same for each. 
+		</p>
+		
+		<p>
+			A factor for sorting a sequence of elements
+			would take into consideration whether the sort needs to be stable. There are
+			stable algorithms that preserve the relative order of equal elements, and
+			there are others that don't waste their time with that when it isn't required.
+		</p>
+		
+		<h2>
+			Sorting Alorithms
+		</h2>
+		
+		Here is a list of some common sorting algorithms and how they work. For the purpose
+		of these examples, I will assume they are always being sorted from least to greatest.
+		The nice animations of these sorts all come from Wikipedia's articles on the sorts,
+		which can be reached by clicking on the animation, or on the More Information links.
+		
+		<h3>
+			Bubble Sort
+		</h3>
+		
+		<h4>
+			Time Complexity: Quadratic
+			<br/>
+			Stability: Stable
+			<br/>
+			<a href="http://en.wikipedia.org/wiki/Bubble_sort">
+				More Information
+			</a>
+		</h4>
+		
+		<!-- Wikipedia bubble sort animation -->
+		<a href="http://en.wikipedia.org/wiki/Bubble_sort">
+			<img 
+				class="alignright"
+				width="300"
+				height="180"
+				src="http://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif"
+				title="Bubble sort animation"
+				alt="Wikipedia bubble sort animation"
+			/>
+		</a>
+		
+		<p>
+			Bubble sort is considered one of the worst sorts out there, but it is 
+			really easy to follow. The algorithm is as follows:
+		</p>
+		
+		<ul>
+			<li>
+				Two elements are examined at a time to be compared. By "move", the second
+				of these two elements and the one after it take these positions.
+			</li>
+		</ul>
+		
+		<ol>
+			<li>
+				Start at the first two elements. If they are out of order, swap them.
+			</li>
+			
+			<li>
+				Move and repeat until a full pass of the array is complete.
+			</li>
+			
+			<li>
+				Repeat passes until one pass does not swap any elements.
+			</li>
+		</ol>
+		
+		<h3>
+			Selection Sort
+		</h3>
+		
+		<!-- Wikipedia selection sort animation -->
+		<a href="http://en.wikipedia.org/wiki/Selection_sort">
+			<img 
+				class="alignright"
+				width="80"
+				height="230"
+				src="https://upload.wikimedia.org/wikipedia/commons/9/94/Selection-Sort-Animation.gif"
+				title="Selection sort animation"
+				alt="Wikipedia selection sort animation"
+			/>
+		</a>
+		
+		<h4>
+			Time Complexity: Quadratic
+			<br/>
+			Stability: Unstable
+			<br/>
+			<a href="https://en.wikipedia.org/wiki/Selection_sort">
+				More Information
+			</a>
+		</h4>
+		
+		<p>
+			Selection sort is also a very slow sort, but also very simple. 
+			Here's what it does:
+		</p>
+		
+		<ol>
+			<li>
+				Start at the first position in the array.
+			</li>
+			
+			<li>
+				Search the rest of the array for the smallest element.
+			</li>
+			
+			<li>
+				Repeat, starting one element further from the beginning each time.
+			</li>
+		</ol>
+		
+		<h3>
+			Insertion Sort
+		</h3>
+		
+		<h4>
+			Time Complexity: Quadratic
+			<br/>
+			Stability: Stable
+			<br/>
+			<a href="https://en.wikipedia.org/wiki/Insertion_sort">
+				More Information
+			</a>
+		</h4>
+		
+		<!-- Wikipedia insertion sort animation -->
+		<a href="http://en.wikipedia.org/wiki/Insertion_sort">
+			<img 
+				class="alignright"
+				width="300"
+				height="180"
+				src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif"
+				title="Insertion sort animation"
+				alt="Wikipedia insertion sort animation"
+			/>
+		</a>
+		
+		<p>
+			Although insertion sort has a quadratic worst-case time complexity, it 
+			usually performs closer to linear time. It's also really simple to understand.
+		</p>
+		
+		<ol>
+			<li>
+				Start at the second position in the array.
+			</li>
+			
+			<li>
+				Shift previous elements that are larger than this element to the right until
+				a smaller element or the beginning of the array is encountered.
+			</li>
+			
+			<li>
+				Insert the element into that position and repeat with the next 
+				unsorted element.
+			</li>
+		</ol>
+		
+		<p>
+			These algorithms were all easy to follow, but do not perform that well. 
+			Here is another batch of algorithms that do a bit better, but with that
+			performance increase comes a bit of complexity in how they work.
+		</p>
+		
+		<h3>
+			Quicksort
+		</h3>
+		
+		<h4>
+			Time Complexity: Quadratic
+			<br/>
+			Stability: Unstable
+			<br/>
+			<a href="https://en.wikipedia.org/wiki/Quicksort">
+				More Information
+			</a>
+		</h4>
+		
+		<!-- Wikipedia quicksort animation -->
+		<a href="http://en.wikipedia.org/wiki/Quicksort">
+			<img 
+				class="alignright"
+				width="300"
+				height="180"
+				src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Quicksort-example.gif"
+				title="Quicksort animation"
+				alt="Wikipedia quicksort animation"
+			/>
+		</a>
+		
+		<p>
+			Quicksort has a quadratic worst-case time complexity, but what really makes
+			the difference is which element is chosen as the pivot. For true quadratic
+			complexity, every pivot would be on the very end of the elements' value range.
+			In practice, it performs fairly quickly on average.
+		</p>
+		
+		<p>
+			This is also Haskell's prime example of its beauty. The 
+			<a href="http://www.haskell.org/haskellwiki/Introduction#Quicksort_in_Haskell">
+				canonical quicksort</a>	in Haskell is 5 lines, but not in-place:
+		</p>
+		
+		<pre>
+			<code>
+quicksort [] = [] 
+quicksort(p : xs) = quicksort lesser ++ [p] ++ quicksort greater 
+    where
+        lesser = filter(&lt;p) xs 
+        greater = filter(&gt;=p) xs
+			</code>
+		</pre>
+		
+		<p>
+			The first line defines the base case of quicksort taking an empty list
+			as being an empty list. The second defines the actual sort, in which a pivot, p,
+			is a single element in a list, xs. Three lists are concatenated: a recursively 
+			sorted list of elements less than p, p as a list, and a recursively sorted list 
+			of elements greater than p. The third line starts the where section, in which
+			"variables" are declared. The fourth line has one such "variable", lesser,
+			which is defined as a list of all elements less than the pivot. Likewise,
+			greater is a list of all elements greater than or equal to the pivot. There
+			is an extra line in the link, but it's optional, and just declares the 
+			function's signature.
+		</p>
+		
+		<p>
+			Hopefully the Haskell exmaple provides some insight on how the algorithm
+			does what it does, but here is a step-by-step version:
+		</p>
+		
+		<ol>
+			<li>
+				If the array passed in is of size 0 or 1, return the array.
+			</li>
+			
+			<li>
+				Choose an element as the pivot. Ideally, half of the elements in the array
+				should be less than this, and half greater. Take this out of the array.
+			</li>
+			
+			<li>
+				Make an array of all elements less than or equal to the pivot, and one
+				of all elements greater than the pivot.
+			</li>
+			
+			<li>
+				Return an array composed of recursively calling this function with the 
+				array of lesser elements, concatenated with the pivot, concatenated with
+				recursively calling this function with the greater elements.
+			</li>
+		</ol>
+		
+		<h3>
+			Merge Sort
+		</h3>
+		
+		<h4>
+			Time Complexity: Linearithmic
+			<br/>
+			Stability: Stable
+			<br/>
+			<a href="https://en.wikipedia.org/wiki/Merge_sort">
+				More Information
+			</a>
+		</h4>
+		
+		<!-- Wikipedia mergesort animation -->
+		<a href="http://en.wikipedia.org/wiki/Merge sort">
+			<img 
+				class="alignright"
+				width="300"
+				height="180"
+				src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif"
+				title="Merge sort animation"
+				alt="Wikipedia merge sort animation"
+			/>
+		</a>
+		
+		<p>
+			Merge sort seems to be one of the common sorts to implement when not using the
+			really easy to code sorts. It's another recursive sorting algorithm that
+			divides the array in half and passes off each half to be sorted, then later
+			recombined to form a sorted array at each level.
+		</p>
+		
+		<p>
+			Stephan T. Lavavej, at Microsoft, did something really neat using merge sort.
+			He wrote an implementation of merge sort that would work at compile-time
+			using C++ metaprogramming techniques. He discusses it at length in 
+			<a href="http://channel9.msdn.com/Series/C9-Lectures-Stephan-T-Lavavej-Core-C-/Stephan-T-Lavavej-Core-Cpp-8-of-n">
+				this Channel 9 video</a>. 
+			It's pretty neat how it's possible to make your compiler sort a bunch of numbers
+			before the program is even run.
+		</p>
+		
+		<h5>
+			Sorting Function:
+		</h5>
+		
+		<ol>
+			<li>
+				If the array size is 0 or 1, return the same array.
+			</li>
+			
+			<li>
+				Create an array of all elements to the left of the middle one and an array 
+				of all elements to the right, including the middle one.
+			</li>
+			
+			<li>
+				Call the merging function on the results of recursively calling the sorting
+				function on the left and right halves.
+			</li>
+		</ol>
+		
+		<h5>
+			Merging Function:
+		</h5>
+		
+		<ol>
+			<li>
+				Create an array for the result of merging both arrays.
+			</li>
+			
+			<li>
+				While the size of either array is not 0:
+			</li>
+			
+			<ol>
+				<li>
+					If either array has 0 elements, move the first element of the other 
+					array to the end of the result array.
+				</li>
+				
+				<li>
+					Else, take the smaller of the first element in the first array and
+					the first element in the second array and move it to the end of the
+					result array.
+				</li>
+			</ol>
+			
+			<li>
+				Return the result array.
+			</li>
+		</ol>
+		
+		<h3>
+			Bogosort (A.K.A Stupid Sort or Slowsort)
+		</h3>
+		
+		<h4>
+			Time Complexity: Unbounded
+			<br/>
+			Stability: Unstable
+			<br/>
+			<a href="https://en.wikipedia.org/wiki/Bogosort">
+				More Information
+			</a>
+		</h4>
+		
+		<p>
+			This is a fun and completely ridiculous sort that randomly shuffles
+			the array until it's sorted. For a formal explanation:
+		</p>
+		
+		<ol>
+			<li>
+				While the array is unsorted, randomly shuffle every element in the array.
+			</li>
+		</ol>
+		
+		<h2>
+			The Sorting Visualization Program
+		</h2>
+		
+		<p>
+			I've made a program that lets you visualize each step of these sorts. It
+			can be downloaded via the button below. The main interface lets you choose which
+			sort to perform and ten numbers as the starting array. A separate display shows
+			which elements are being accessed. The main interface has a step-by-step button.
+		</p>
+	
+		<!-- Download program button -->
+		<a href="Sort Visualizer.zip">
+			<input type="button" value="Download the Sorting Visualizer"/>
+		</a>
+		
+		<p style="font-size: 10px">
+			Download the ZIP file, unzip everything to the same folder, and run "Sort Visualizer.exe".
+		</p>
+		
+		<h2>
+			The Future of Sorting Algorithms
+		</h2>
+		
+		<p>
+			Algorithms are still being developed today. One such example is a variation on
+			insertion sort called library sort that was developed just six years ago, in
+			2007. While most of the newer sorting algorithms that arise are just variations
+			on existing algorithms, each fits a specific need and proves itself to be the
+			best sort for that particular scenario. This will continue as we discover new
+			scenarios where we need efficient sorting or discover more efficient ways
+			to perform sorting in existing scenarios.
+		</p>
+		
+		<h3>
+			For more about sorting:
+		</h3>
+		
+		<!-- Related Links -->
+		<ul>
+			<li>
+				<a href="https://en.wikipedia.org/wiki/Sorting_algorithm">
+					Wikipedia's "Sorting Algorithm" article
+				</a>
+			</li>
+			
+			<li>	
+				<a href="http://en.wikipedia.org/wiki/Big_O_notation">
+					Big-O Notation
+				</a>
+			</li>
+		</ul>
+		
+		<!-- In the spirit of being a more realistic web page -->
+		<h3>
+			Contact the author
+		</h3>
+		
+		<p>
+			My e-mail address is
+			<a href="mailto:chris.n.devisser@gmail.com">
+				chris.n.devisser@gmail.com
+			</a>.
+			Contact me if you have any questions or suggestions.
+		</p>
+		
+		<script type="text/javascript" src="three.js"></script>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="3d.js"></script>
+	</body>
+</html>

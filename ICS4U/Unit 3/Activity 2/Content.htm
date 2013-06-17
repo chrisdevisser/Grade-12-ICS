@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Content</title>
+    <link rel="stylesheet" href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/course_techno.css?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" type="text/css" />
+<script type="text/javascript" src="/d2l/common/math/MathML.js?v=10.1.0.390-56" ></script><script type="text/javascript">D2LMathML.DesktopInit('/d2l/common/mathjax/2.0.1/MathJax.js?config=MML_HTMLorMML&v=10.1.0.390-56','/d2l/common/mathjax/2.0.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML&v=10.1.0.390-56');</script></head>
+<body>
+<div class="wrap">
+<div class="header"><img src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/globe.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" class="globe" alt="Image of Globe" />
+<div class="courseTitle">ICS4U (Java): Computer Science, Grade 12, University Preparation</div>
+<h1>Unit 3: Advanced Topics</h1>
+<h2>Activity 2: Recursion</h2>
+</div>
+<div class="subNav"><a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/overview.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Overview</a> | <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/expectations.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Expectations</a> | <b>Content</b> | <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/assignment.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Assignment</a></div>
+<h3>Content</h3>
+<hr />
+<h4>What is Recursion?</h4>
+<table class="picturetable" cellpadding="5" summary="This table is for formatting purposes." style="width: 95%;">
+<tbody>
+<tr>
+<td>
+<p>Like the "Shingle Guy" (shown on the right) installing multiple rows of roof shingles, <strong>recursion</strong> involves performing the same task repeatedly until it is complete.</p>
+<p>A <strong>recursive program</strong>, <strong>function</strong>, or <strong>procedure</strong> is one that invokes itself in processing the problem it is programmed to resolve.</p>
+<p>The process of recursion can be used whenever a problem can be corrected by solving one or more smaller versions of the same problem and then combining the results.</p>
+<p><em>To prevent <strong>infinite recursion</strong>, a base (trivial) case that requires no recursion must be part of the recursive solution.</em></p>
+</td>
+<th><a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/docs/U3A2_roofer/roofer.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" target="_blank"><img src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/image6.jpeg?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="This is an image of he Shingle Guy." class="middle" /> </a> <span class="caption"> <span class="center">Click to play animation.</span> </span></th></tr>
+</tbody>
+</table>
+<h4><img class="icon" src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/example.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="Example Icon" /> Example</h4>
+<p><strong>Factorials - n! (n Factorial)</strong></p>
+<p>One of the simplest examples of a problem that can be resolved using a recursive algorithm is calculating the factorial of a number.</p>
+<p>The <strong>factorial of a number</strong> is the product of all positive integers from 1 to the number. In mathematical notation, a factorial is represented by the symbol &rdquo; ! &rdquo;.</p>
+<p>For example, 5! = 5 * 4 * 3 * 2 * 1 = 120</p>
+<p>Computing 5! can be thought of as 5*4! <br /> 5! = 5*4! = 5 *24 = 120<br /> or more generally as <br /> n! = n *(n-1)! for n &gt; 0.</p>
+<p>Also, by definition 0! is equal to one.</p>
+<p><strong>Non Recursive Solution for Computing Factorial (5) </strong></p>
+<br />
+<div class="colourbox1">
+<pre>public static void main(String[] args) {
+     int num, fact;
+     fact = 1;
+     num = 5;</pre>
+<pre>     for (int i=1; i&lt;=num; i++) {
+         fact = fact * i;
+     }
+     System.out.println ("Factorial (" + num + "!) is " + fact);</pre>
+<pre>}</pre>
+</div>
+<br />
+<p><strong>Recursive Solution for Computing Factorial(5)</strong></p>
+<p>To implement the factorial problem using recursion, we observe that:<br /> factorial (n) = n * factorial (n-1) = n * (n-1) * factorial ((n-1) -1) and so forth, until n-1 = 1.</p>
+<p>We can create a function which takes an argument <em>n</em>, and returns <em>n</em> multiplied by the factorial of (n-1), except in the base case where n = 1, when it returns 1. <em>This implements the factorial problem using recursion: </em></p>
+<div class="colourbox1">
+<pre> public static void main(String[] args) {
+     int num = 5;
+     System.out.println("Factorial (" + num + "!) is " + fact(num));
+ }
+
+ static public int fact (int n) {
+      if (n == 0 || n ==1) {
+          return 1;
+      } else {
+          return (n * fact(n-1));
+      }
+ }
+</pre>
+</div>
+<table class="picturetable" cellpadding="5" summary="This table is for formatting purposes." style="width: 95%;">
+<tbody>
+<tr><th><img src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/image7.jpeg?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="This is an image of a programming screen with factorial recursion program code." class="middle" /> <span class="caption"> <span class="center"> </span> </span></th>
+<td>
+<p><strong>Steps involved in the Recursive Solution for Computing Factorial (5)</strong></p>
+<br />
+<p>The following diagram shows how the function fact, which takes an <em>int</em> as an input parameter and returns an <em>int</em> as a result, calls itself until it reaches the base case where <em>n = 1</em>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="customStyle2"><img src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/image8.png?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="This is a graphic of the steps involved in finding the factorial of 5 recursively." class="middle" /></p>
+<h4><img class="icon" src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/example.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="Example Icon" /> Example 2</h4>
+<p><strong>Finding the Greatest Common Divisor (GCD)</strong></p>
+<p>Another example of a problem suited to recursion is <strong>Euclid's solution</strong> to calculating the <em><strong>g</strong>reatest <strong>c</strong>ommon <strong>d</strong>ivisor</em> (GCD) for two integers, <em>a</em> and <em>b</em>.</p>
+<p>The <strong>GCD</strong> is the largest integer that divides into both numbers evenly. We can use trial-and-error to find the greatest common divisor of two whole numbers (12 and 18).</p>
+<p>For example,</p>
+<ul>
+<li>12 is evenly divisible by 1, 2, 3, 4, 6, and 12</li>
+<li>18 is evenly divisible by 1, 2, 3, 6, 9, and 18</li>
+<li>Both numbers are evenly divisible by 1, 2, 3, and 6</li>
+<li>6 is the largest common divisor</li>
+</ul>
+<p><strong>Euclidean Algorithm</strong> can also be used to find the GCD. <br /> <em>Euclid's solution is defined as:</em></p>
+<p>GCD (a,b) is a if b==0<br /> else <br /> GCD (a,b) is GCD (b, modulus(a/b))</p>
+<p>For example, if a=187 and b=77</p>
+<p>187 % 77 = 33 <br /> 77 % 33 = 11<br /> 33 % 11 = 0</p>
+<p>Therefore, 11 is the greatest common divisor.</p>
+<p><em>We can create a recursive function that uses Euclid's Algorithm to find the GCD of two integers. </em></p>
+<div class="colourbox1">
+<p>public static void main(String[] args){<br />&nbsp; &nbsp; int n1=27;<br />&nbsp; &nbsp; int n2=18;</p>
+<p>&nbsp; &nbsp; int answer = gcd(n1,n2);</p>
+<p>&nbsp; &nbsp; System.out.println("The GCD of " + n1 + " and " + n2 + " is " + answer);<br /> }</p>
+<p>static public int gcd (int a, int b){<br />&nbsp; &nbsp;if (b == 0){<br />&nbsp; &nbsp; &nbsp; return a;<br />&nbsp; &nbsp;} else {<br />&nbsp; &nbsp; &nbsp; return gcd(b, a%b);<br />&nbsp; &nbsp;}<br /> }</p>
+</div>
+<br />
+<p><img src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/image9.jpeg?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="This is a graphic of the Greatest Common Denominator code with the solution." class="middle" /></p>
+<p><strong>Steps Involved in the Recursive Solution for Calculating GCD</strong></p>
+<p>The function is defined with <strong>two int</strong> values as input parameters (<em>a</em> and <em>b</em>) and returns an <strong>int</strong> as a result. The function calls itself until it reaches the base case where b = 0.</p>
+<p class="center"><img src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/image10.png?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="This is a graphic of the steps involved in finding the GCD recursively. " class="middle" /></p>
+<table class="mmetable">
+<tbody>
+<tr><th><img class="icon" src="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/images/multimedia.gif?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" alt="multimedia icon" /></th>
+<td>
+<p>To learn more, watch the following clip which explains more about <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/mme/U3A2_recursion/LO7081-Recursion.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu" id="MME_d83345c0-4b70-4dea-8736-2470d0ea124d" target="_blank">Recursion</a>. The code is written in <em>ActionScript</em>, but the concepts are still the same.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<br />
+<div class="navbuttons"><a id="__next" href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/content_2.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Next</a></div>
+<div class="disclaimer">
+<p>Unless otherwise indicated, all images in this activity are from the public domain or are &copy; clipart.com or Microsoft clipart and are used with permission.<br /> This is a disclaimer. External Resources will open in a new window. Not responsible for external content.</p>
+</div>
+<hr />
+<div class="subNav"><a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/overview.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Overview</a> | <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/expectations.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Expectations</a> | <b>Content</b> | <a href="/content/enforced/560604-EL_CS_ICS4UE-01_936480_1213Sem2/ICS4U (Java)PU03/ICS4U (Java)PU03A02/assignment.html?_&amp;d2lSessionVal=Oom5a33pe1zWDf2tS1UDzhlgu">Assignment</a></div>
+</div>
+</body>
+</html>
