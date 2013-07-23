@@ -1,0 +1,1 @@
+This is the work I did for my grade 12 course. We started off using Actionscript for a couple days and then switched to Java. I had barely any experience with either, so there is mainly Java in there. 
